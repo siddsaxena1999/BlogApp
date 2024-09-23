@@ -23,7 +23,6 @@ try {
 
 
 app.use(cors({
-    origin: 'http://localhost:5173',
     credentials: true
 }));
 
@@ -34,9 +33,8 @@ app.use('/', userRoutes);
 app.use('/', postRoutes);
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
-const PORT = process.env.PORT;
+if (process.env.PORT) {
+    app.listen(process.env.PORT)
+}
 
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
-
-})
+export default app;

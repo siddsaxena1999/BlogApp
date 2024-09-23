@@ -4,6 +4,8 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Navigate, useParams } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 const modules = {
     toolbar: [
@@ -33,7 +35,8 @@ function EditPost() {
 
     useEffect(() => {
         if (id) {
-            axios.get(`http://localhost:3000/post/${id}`)
+            const url = `${import.meta.env.VITE_API_URL}/post/${id}`;
+            axios.get(url)
                 .then(res => res.data)
                 .then(data => {
                     setPostData(data);
@@ -64,7 +67,8 @@ function EditPost() {
         }
 
         try {
-            const res = await axios.put(`http://localhost:3000/post/${id}`, data, { withCredentials: true });
+            const url = `${import.meta.env.VITE_API_URL}/post/${id}`;
+            const res = await axios.put(url, data, { withCredentials: true });
             toast.success(res.data.message);
             if (res.status === 201) {
                 setTimeout(() => {

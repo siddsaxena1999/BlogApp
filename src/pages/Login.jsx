@@ -3,6 +3,8 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import userContext from '../../store/user.context';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 function Login() {
     const userNameRef = useRef();
@@ -19,7 +21,8 @@ function Login() {
         }
 
         try {
-            const res = await axios.post('http://localhost:3000/login', userInfo, { withCredentials: true });
+            const url = `${import.meta.env.VITE_API_URL}/login`;
+            const res = await axios.post(url, userInfo, { withCredentials: true });
             const data = res.data;
             console.log(data);
             toast.success("Login successful");

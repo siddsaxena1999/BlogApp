@@ -1,13 +1,17 @@
 import React from 'react'
 import TimeAgo from 'react-time-ago';
 import { Link } from 'react-router-dom';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 function BlogPost({ _id, cover, title, summary, createdAt, author }) {
+    const url = `${import.meta.env.VITE_API_URL}/`;
+
     return (
         <div className="blogPost w-full flex md:flex-row flex-col gap-5 md:p-0 px-8">
             <div className='md:w-1/2 w-full'>
                 <Link to={`/post/${_id}`}>
-                    <img className='w-full' src={'http://localhost:3000/' + cover} alt="blogImage" />
+                    <img className='w-full' src={`${url}${cover}`} alt="blogImage" />
                 </Link>
             </div>
             <div className='md:w-1/2 px-8 flex flex-col md:items-start items-center gap-5'>

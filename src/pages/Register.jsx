@@ -1,6 +1,8 @@
 import React, { useRef } from 'react'
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 function Register() {
 
@@ -16,7 +18,8 @@ function Register() {
         const password = passwordRef.current.value;
 
         try {
-            const res = await axios.post("http://localhost:3000/register", { userName, email, password })
+            const url = `${import.meta.env.VITE_API_URL}/register`;
+            const res = await axios.post(url, { userName, email, password })
             const data = res.data;
             console.log(data);
             toast.success("Registration successful");

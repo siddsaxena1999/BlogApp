@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import userContext from '../../store/user.context';
 import { toast } from 'react-hot-toast';
 import { Navigate } from 'react-router-dom';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 function SinglePost() {
     const { id } = useParams();
@@ -14,7 +16,8 @@ function SinglePost() {
     const [redirect, setRedirect] = useState(false);
     useEffect(() => {
         try {
-            axios.get(`http://localhost:3000/post/${id}`)
+            const url = `${import.meta.env.VITE_API_URL}/post/${id}`;
+            axios.get(url)
                 .then(res => res.data)
                 .then(data => setPostInfo(data));
         } catch (error) {
@@ -24,7 +27,8 @@ function SinglePost() {
 
     const deletePost = async () => {
         try {
-            const res = await axios.delete(`http://localhost:3000/post/${id}`, { withCredentials: true });
+            const url = `${import.meta.env.VITE_API_URL}/post/${id}`;
+            const res = await axios.delete(url, { withCredentials: true });
             console.log(res.data.message);
             toast.success(res.data.message);
             setTimeout(() => {

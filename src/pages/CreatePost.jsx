@@ -3,6 +3,8 @@ import ReactQuill from 'react-quill';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Navigate } from 'react-router-dom';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 import 'react-quill/dist/quill.snow.css';
 
@@ -41,7 +43,8 @@ function CreatePost() {
         data.set('content', contentRef.current.value)
 
         try {
-            const res = await axios.post('http://localhost:3000/post', data, { withCredentials: true });
+            const url = `${import.meta.env.VITE_API_URL}/post`;
+            const res = await axios.post(url, data, { withCredentials: true });
             toast.success(res.data.message);
             if (res.status === 201) {
                 setTimeout(() => {

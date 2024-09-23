@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import userContext from '../../store/user.context';
 import { toast } from 'react-hot-toast';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 function Header() {
     const { userInfo, setUserInfo } = useContext(userContext);
@@ -10,7 +12,8 @@ function Header() {
     useEffect(() => {
         const getCookies = async () => {
             try {
-                const res = await axios.get('http://localhost:3000/profile', { withCredentials: true });
+                const url = `${import.meta.env.VITE_API_URL}/profile`;
+                const res = await axios.get(url, { withCredentials: true });
                 setUserInfo(res.data);
             } catch (error) {
                 console.log(error.message);
@@ -21,7 +24,8 @@ function Header() {
 
     const logoutUser = async () => {
         try {
-            const res = await axios.get('http://localhost:3000/logout', { withCredentials: true });
+            const url = `${import.meta.env.VITE_API_URL}/logout`;
+            const res = await axios.get(url, { withCredentials: true });
             console.log(res.data);
             setTimeout(() => {
                 toast.success("Logged out!");

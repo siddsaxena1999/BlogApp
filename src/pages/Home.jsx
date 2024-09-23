@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import BlogPost from '../components/BlogPost';
 import axios from 'axios';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 function Home() {
 
     const [posts, setPosts] = useState([]);
     useEffect(() => {
         try {
-            axios.get('http://localhost:3000/posts')
+            const url = `${import.meta.env.VITE_API_URL}/posts`;
+            axios.get(url)
                 .then(res => res.data)
                 .then(data => setPosts(data))
         } catch (error) {

@@ -31,7 +31,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/', userRoutes);
 app.use('/', postRoutes);
-app.use('/uploads', express.static(__dirname + '/uploads'))
+app.use('/api/uploads', express.static(__dirname + '/uploads'))
 
 if (process.env.PORT) {
     app.listen(process.env.PORT)
